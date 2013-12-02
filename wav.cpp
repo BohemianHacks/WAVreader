@@ -18,22 +18,13 @@ int stringBytes(const std::string& str){
     return getBytes(stringy, str.length());
 }
 
+class wavReader{
+    public:
+        wavReader(const std::string& filename){};
+        bool good;
+}
 
-int main(int argc, char** argv){
-    std::string filename = "";
-    if ((argc < 2) && (filename == "")){
-        std::cout << argv[0] << " [options] <filename>\n";
-        return 1;
-    }else{
-        for (int a = 1; a < argc; a++){
-            if (strstr(argv[a],"-") != NULL){
-
-            }else{
-                filename = std::string(argv[a]);
-                a = argc;
-            }
-        }
-    }
+wavReader(const std::string& filename){
     std::fstream wav;
     wav.open(filename.c_str(), std::fstream::in | std::fstream::binary);
     if (wav.is_open()){
@@ -57,15 +48,24 @@ int main(int argc, char** argv){
                 std::cout << subchunk2size << '\n';
             }else{
                 std::cout << "Non-PCM file detected\n";
+                good = false;
             }
         }else{
             std::cout << "Not valid WAV file\n";
+            good = false;
         }
         wav.close();
     }else{
+        good = false;
         std::cout << "Could not open " << filename << '\n';
         wav.close();
-        return 1;
     }
-    return 0;
 }
+
+int main(int argc, char** argv){
+    if (argc < 2){
+        std::cout << argv[0] << " [options] <filename>\n";
+        return 1;
+    }else{
+        rdr = wavReader(argv[1]);
+    }

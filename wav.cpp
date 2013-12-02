@@ -10,19 +10,19 @@ int getBytes(std::istream& binFile,const size_t num){
         bytes |= binFile.get() << (8 * size);
     }
     return bytes;
-}
+};
 
 int stringBytes(const std::string& str){
     std::stringstream stringy;
     stringy << str;
     return getBytes(stringy, str.length());
-}
+};
 
 class wavReader{
     public:
         wavReader(const std::string& filename){};
         bool good;
-}
+};
 
 wavReader(const std::string& filename){
     std::fstream wav;

@@ -29,6 +29,7 @@ class wavReader{
         int numChannels;
         int sampleRate;
         int subchunk2ID;
+        int subchunk2size;
         
     public:
         wavReader(const std::string& filename);
@@ -51,7 +52,7 @@ wavReader(const std::string& filename){
         int bitsPerSample = getBytes(wav, 2);
         if ((subchunk1ID == stringBytes("fmt ")) && (format == stringBytes("WAVE")) && (ChunkID == stringBytes("RIFF"))){
             if (audioFormat == 1){
-                int subchunk2ID = 0;
+                subchunk2ID = 0;
                 while (wav.good() && subchunk2ID != stringBytes("data")){
                     subchunk2ID = getBytes(wav, 4);
                 }

@@ -60,10 +60,6 @@ wavReader::wavReader(const std::string& filename){
                 }
                 subchunk2size = getBytes(wav, 4);
                 dataStart = wav.tellg();
-                for (int moo = 0; moo < 20; moo++){
-                    std::cout << getBytes(wav,bitsPerSample/8) << '\n';
-                }
-                
             }else{
                 std::cout << "Non-PCM file detected\n";
                 good = false;
@@ -83,7 +79,7 @@ wavReader::wavReader(const std::string& filename){
 
 std::vector <int> wavReader::getSample(unsigned pos){
     std::vector <int> channels;
-    //wav.seekg(pos+dataStart, wav.beg);
+    wav.seekg(pos+dataStart, wav.beg);
     for (int i = 0; i < numChannels; i++){
         int val = getBytes(wav,bitsPerSample/8);
         channels.push_back(val);
@@ -100,7 +96,7 @@ int main(int argc, char** argv){
     }else{
         wavReader rdr(argv[1]);
         if (rdr.good){
-            for (unsigned j = 0; j < 2; j++){
+            for (unsigned j = 0; j < rdr.subchunk2size; j++){
                 std::vector <int> channels = rdr.getSample(j);
                 for (size_t i = 0; i < channels.size(); i++){
                     std::cout << channels[i] << '\n';

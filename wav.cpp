@@ -102,9 +102,9 @@ int main(int argc, char** argv){
         if (rdr.good){
             for (unsigned j = 0; j < rdr.subchunk2size; j++){
                 std::vector <int> channels = rdr.getSample(j);
-                for (size_t i = 0; i < channels.size(); i++){
-                    std::cout << "Channel " << i << ": " << normalize(channels[i],-32768,32767) << '\n';
-                }
+                //for (size_t i = 0; i < channels.size(); i++){
+                //    std::cout << "Channel " << i << ": " << normalize(channels[i],-32768,32767) << '\n';
+                //}
             }
         }
     }

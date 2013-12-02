@@ -1,4 +1,5 @@
 #include <cstring>
+#include <cstdint>
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -81,7 +82,7 @@ std::vector <int> wavReader::getSample(unsigned pos){
     std::vector <int> channels;
     wav.seekg(pos+dataStart, wav.beg);
     for (int i = 0; i < numChannels; i++){
-        int val = ~getBytes(wav,bitsPerSample/8);
+        int_fast16_t val = ~uint_fast16_t(getBytes(wav,bitsPerSample/8));
         val = val + 1;
         channels.push_back(val);
     }

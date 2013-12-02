@@ -83,14 +83,14 @@ wavReader::wavReader(const std::string& filename){
 }
 
 std::vector <int> wavReader::getSamples(unsigned startTime, unsigned endTime){
-    std::vector <int> channels;
+    std::vector <std::vector <int>> channels;
     unsigned frames = sampleRate*(double(endTime - startTime)/1000.0);
     unsigned pos = sampleRate*(double(startTime)/1000.0);
     wav.seekg(pos+dataStart, wav.beg);
     for (unsigned j = 0; j < frames; j++){
         for (int i = 0; i < numChannels; i++){
             int val = (int16_t)getBytes(wav,bitsPerSample/8);
-            channels.push_back(val);
+            channels[i].push_back(val);
         }
     }
     return channels;
@@ -104,6 +104,7 @@ int main(int argc, char** argv){
         wavReader rdr(argv[1]);
         if (rdr.good){
             std::vector <int> channels = rdr.getSamples(0,1000);
+            for(unsigned i = 0; i < channels.size)
         }
     }
 }

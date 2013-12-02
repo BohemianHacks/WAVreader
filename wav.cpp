@@ -6,6 +6,10 @@
 #include <sstream>
 #include <vector>
 
+double normalize(val,max,min){
+    return double(val-min)/double(max-min);
+}
+
 unsigned getBytes(std::istream& binFile,const unsigned num){
     unsigned bytes = 0;
     for (unsigned size = 0; size < num; ++size){
@@ -99,7 +103,7 @@ int main(int argc, char** argv){
             for (unsigned j = 0; j < rdr.subchunk2size; j++){
                 std::vector <int> channels = rdr.getSample(j);
                 for (size_t i = 0; i < channels.size(); i++){
-                    std::cout << "Channel " << i << ": " << channels[i] << '\n';
+                    std::cout << "Channel " << i << ": " << normalize(channels[i],-32768,32767) << '\n';
                 }
             }
         }

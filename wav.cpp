@@ -79,8 +79,9 @@ int main(int argc, char** argv){
         std::cout << argv[0] << " [options] <filename>\n";
         return 1;
     }else{
-        rdr = wavReader(argv[1]);
+        wavReader rdr(argv[1]);
         if rdr.good{
             std::cout << rdr.bitsPerSample << '\n';
         }
     }
+}

@@ -6,9 +6,9 @@
 #include <sstream>
 #include <vector>
 
-unsigned getBytes(std::istream& binFile,const size_t num){
+unsigned getBytes(std::istream& binFile,const unsigned num){
     unsigned bytes = 0;
-    for (size_t size = 0; size < num; ++size){
+    for (unsigned size = 0; size < num; ++size){
         bytes |= binFile.get() << (8 * size);
     }
     return bytes;

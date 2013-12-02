@@ -80,7 +80,7 @@ int main(int argc, char** argv){
         return 1;
     }else{
         wavReader rdr(argv[1]);
-        if rdr.good{
+        if (rdr.good){
             std::cout << rdr.bitsPerSample << '\n';
         }
     }

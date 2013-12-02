@@ -81,8 +81,8 @@ wavReader::wavReader(const std::string& filename){
 
 std::vector <int> wavReader::getSample(unsigned pos){
     std::vector <int> channels;
-    wav.seekg(pos+dataStart, ios::beg);
-    for (i = 0; i < numChannels: i++){
+    wav.seekg(pos+dataStart, wav.beg);
+    for (int i = 0; i < numChannels; i++){
         channels.push_back(getBytes(wav,bitsPerSample/8));
     }
     return channels;

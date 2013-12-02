@@ -21,6 +21,7 @@ int stringBytes(const std::string& str){
 
 class wavReader{
     private:
+        std::fstream wav;
         int ChunkID;
         int size;
         int format;
@@ -32,6 +33,7 @@ class wavReader{
         int subchunk2ID;
         int subchunk2size;
         int bitsPerSample;
+        unsigned dataStart;
         
     public:
         wavReader(const std::string& filename);
@@ -40,7 +42,6 @@ class wavReader{
 };
 
 wavReader::wavReader(const std::string& filename){
-    std::fstream wav;
     wav.open(filename.c_str(), std::fstream::in | std::fstream::binary);
     if (wav.is_open()){
         ChunkID = getBytes(wav, 4);
@@ -60,6 +61,8 @@ wavReader::wavReader(const std::string& filename){
                     subchunk2ID = getBytes(wav, 4);
                 }
                 subchunk2size = getBytes(wav, 4);
+                dataStart = wav.tellg();
+                
             }else{
                 std::cout << "Non-PCM file detected\n";
                 good = false;
@@ -74,6 +77,16 @@ wavReader::wavReader(const std::string& filename){
         std::cout << "Could not open " << filename << '\n';
         wav.close();
     }
+}
+
+std::vector <int> wavReader::getSample(unsigned pos){
+    std::vector <int> channels;
+    wav.seekg(pos+dataStart, ios::beg);
+    for (i = 0; i < numChannels: i++){
+        channels.push_back(getBytes(wav,bitsPerSample/8));
+    }
+    return channels;
+    
 }
 
 int main(int argc, char** argv){

@@ -82,15 +82,18 @@ wavReader::wavReader(const std::string& filename){
     }
 }
 
-std::vector <int> wavReader::getSample(unsigned pos){
+std::vector <int> wavReader::getSample(unsigned startTime, unsigned endTime){
     std::vector <int> channels;
+    unsigned frames = sampleRate*(double(endTime - startTime)/1000.0);
+    unsigned pos = sampleRate*(double(startTime)/1000.0);
     wav.seekg(pos+dataStart, wav.beg);
-    for (int i = 0; i < numChannels; i++){
-        int val = (int16_t)getBytes(wav,bitsPerSample/8);
-        channels.push_back(val);
+    for (unsigned j = 0; j < frames; j++){
+        for (int i = 0; i < numChannels; i++){
+            int val = (int16_t)getBytes(wav,bitsPerSample/8);
+            channels.push_back(val);
+        }
     }
     return channels;
-    
 }
 
 int main(int argc, char** argv){
@@ -100,12 +103,7 @@ int main(int argc, char** argv){
     }else{
         wavReader rdr(argv[1]);
         if (rdr.good){
-            for (unsigned j = 0; j < rdr.subchunk2size; j++){
-                std::vector <int> channels = rdr.getSample(j);
-                //for (size_t i = 0; i < channels.size(); i++){
-                //    std::cout << "Channel " << i << ": " << normalize(channels[i],-32768,32767) << '\n';
-                //}
-            }
+            std::vector <int> channels = rdr.getSample(0,1000);
         }
     }
 }

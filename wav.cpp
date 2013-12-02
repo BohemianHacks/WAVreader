@@ -40,7 +40,7 @@ class wavReader{
         int bitsPerSample;
         unsigned dataStart;
         wavReader(const std::string& filename);
-        std::vector <int> getSample(unsigned pos);
+        std::vector <int> getSamples(unsigned startTime, unsigned endTime);
         bool good;
 };
 
@@ -82,7 +82,7 @@ wavReader::wavReader(const std::string& filename){
     }
 }
 
-std::vector <int> wavReader::getSample(unsigned startTime, unsigned endTime){
+std::vector <int> wavReader::getSamples(unsigned startTime, unsigned endTime){
     std::vector <int> channels;
     unsigned frames = sampleRate*(double(endTime - startTime)/1000.0);
     unsigned pos = sampleRate*(double(startTime)/1000.0);

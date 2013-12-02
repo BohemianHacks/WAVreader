@@ -79,7 +79,7 @@ wavReader::wavReader(const std::string& filename){
 
 std::vector <int> wavReader::getSample(unsigned pos){
     std::vector <int> channels;
-    wav.seekg(pos+dataStart, wav.beg);
+    //wav.seekg(pos+dataStart, wav.beg);
     for (int i = 0; i < numChannels; i++){
         int val = getBytes(wav,bitsPerSample/8);
         channels.push_back(val);

@@ -30,6 +30,7 @@ class wavReader{
         int sampleRate;
         int subchunk2ID;
         int subchunk2size;
+        int bitsPerSample;
         
     public:
         wavReader(const std::string& filename);
@@ -49,7 +50,7 @@ wavReader(const std::string& filename){
         numChannels = getBytes(wav, 2);
         sampleRate = getBytes(wav, 4);
         getBytes(wav, 6);
-        int bitsPerSample = getBytes(wav, 2);
+        bitsPerSample = getBytes(wav, 2);
         if ((subchunk1ID == stringBytes("fmt ")) && (format == stringBytes("WAVE")) && (ChunkID == stringBytes("RIFF"))){
             if (audioFormat == 1){
                 subchunk2ID = 0;
@@ -57,7 +58,6 @@ wavReader(const std::string& filename){
                     subchunk2ID = getBytes(wav, 4);
                 }
                 subchunk2size = getBytes(wav, 4);
-                std::cout << subchunk2size << '\n';
             }else{
                 std::cout << "Non-PCM file detected\n";
                 good = false;
@@ -80,4 +80,7 @@ int main(int argc, char** argv){
         return 1;
     }else{
         rdr = wavReader(argv[1]);
+        if rdr.good{
+            std::cout << rdr.bitsPerSample << '\n';
+        }
     }

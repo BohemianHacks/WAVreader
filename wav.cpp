@@ -19,6 +19,17 @@ int stringBytes(const std::string& str){
 };
 
 class wavReader{
+    private:
+        int ChunkID;
+        int size;
+        int format;
+        int subchunk1ID;
+        int subchunk1size;
+        int audioFormat;
+        int numChannels;
+        int sampleRate;
+        int subchunk2ID;
+        
     public:
         wavReader(const std::string& filename);
         bool good;
@@ -28,14 +39,14 @@ wavReader(const std::string& filename){
     std::fstream wav;
     wav.open(filename.c_str(), std::fstream::in | std::fstream::binary);
     if (wav.is_open()){
-        int ChunkID = getBytes(wav, 4);
-        int size = getBytes(wav, 4);
-        int format = getBytes(wav, 4);
-        int subchunk1ID = getBytes(wav, 4);
-        int subchunk1size = getBytes(wav, 4);
-        int audioFormat = getBytes(wav, 2);
-        int numChannels = getBytes(wav, 2);
-        int sampleRate = getBytes(wav, 4);
+        ChunkID = getBytes(wav, 4);
+        size = getBytes(wav, 4);
+        format = getBytes(wav, 4);
+        subchunk1ID = getBytes(wav, 4);
+        subchunk1size = getBytes(wav, 4);
+        audioFormat = getBytes(wav, 2);
+        numChannels = getBytes(wav, 2);
+        sampleRate = getBytes(wav, 4);
         getBytes(wav, 6);
         int bitsPerSample = getBytes(wav, 2);
         if ((subchunk1ID == stringBytes("fmt ")) && (format == stringBytes("WAVE")) && (ChunkID == stringBytes("RIFF"))){
@@ -44,7 +55,7 @@ wavReader(const std::string& filename){
                 while (wav.good() && subchunk2ID != stringBytes("data")){
                     subchunk2ID = getBytes(wav, 4);
                 }
-                int subchunk2size = getBytes(wav, 4);
+                subchunk2size = getBytes(wav, 4);
                 std::cout << subchunk2size << '\n';
             }else{
                 std::cout << "Non-PCM file detected\n";

@@ -35,7 +35,7 @@ class wavReader{
         
     public:
         wavReader(const std::string& filename);
-        std::vector <int> getSample(pos_type pos);
+        std::vector <int> getSample(unsigned pos);
         bool good;
 };
 
@@ -83,7 +83,7 @@ int main(int argc, char** argv){
     }else{
         wavReader rdr(argv[1]);
         if (rdr.good){
-            std::cout << rdr.bitsPerSample << '\n';
+            //do stuff
         }
     }
 }

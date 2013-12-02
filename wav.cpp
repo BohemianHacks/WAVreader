@@ -1,4 +1,5 @@
 #include <cstring>
+#include <cstdint>
 #include <iostream>
 #include <string>
 #include <fstream>

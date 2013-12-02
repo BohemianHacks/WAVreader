@@ -20,11 +20,11 @@ int stringBytes(const std::string& str){
 
 class wavReader{
     public:
-        wavReader(const std::string& filename){};
+        wavReader(const std::string& filename);
         bool good;
 };
 
-wavReader::wavReader(const std::string& filename){
+wavReader(const std::string& filename){
     std::fstream wav;
     wav.open(filename.c_str(), std::fstream::in | std::fstream::binary);
     if (wav.is_open()){

@@ -103,7 +103,7 @@ int main(int argc, char** argv){
     }else{
         wavReader rdr(argv[1]);
         if (rdr.good){
-            std::vector <int> channels = rdr.getSample(0,1000);
+            std::vector <int> channels = rdr.getSamples(0,1000);
         }
     }
 }

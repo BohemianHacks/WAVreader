@@ -62,6 +62,7 @@ wavReader::wavReader(const std::string& filename){
                 }
                 subchunk2size = getBytes(wav, 4);
                 dataStart = wav.tellg();
+                std::cout << "dataStart: " << dataStart << '\n';
                 
             }else{
                 std::cout << "Non-PCM file detected\n";

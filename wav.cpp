@@ -20,7 +20,7 @@ int stringBytes(const std::string& str){
 };
 
 class wavReader{
-    private:
+    public:
         std::fstream wav;
         int ChunkID;
         int size;
@@ -34,8 +34,6 @@ class wavReader{
         int subchunk2size;
         int bitsPerSample;
         unsigned dataStart;
-        
-    public:
         wavReader(const std::string& filename);
         std::vector <int> getSample(unsigned pos);
         bool good;
@@ -98,8 +96,8 @@ int main(int argc, char** argv){
     }else{
         wavReader rdr(argv[1]);
         if (rdr.good){
-            for (unsigned j = 0; j < 10; j++){
-                std::vector <int> channels = rdr.getSample(1000+j);
+            for (unsigned j = 0; j < subchunk2size; j++){
+                std::vector <int> channels = rdr.getSample(j);
                 for (size_t i = 0; i < channels.size(); i++){
                     std::cout << channels[i] << '\n';
                 }

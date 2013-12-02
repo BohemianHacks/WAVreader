@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 int getBytes(std::istream& binFile,const size_t num){
     int bytes = 0;
@@ -34,6 +35,7 @@ class wavReader{
         
     public:
         wavReader(const std::string& filename);
+        std::vector <int> getSample(pos_type pos);
         bool good;
 };
 

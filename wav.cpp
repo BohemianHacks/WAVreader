@@ -7,7 +7,7 @@
 #include <vector>
 
 int getBytes(std::istream& binFile,const size_t num){
-    int bytes = 0;
+    unsigned bytes = 0;
     for (size_t size = 0; size < num; ++size){
         bytes |= binFile.get() << (8 * size);
     }

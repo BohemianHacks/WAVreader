@@ -67,12 +67,13 @@ wavReader::wavReader(const std::string& filename){
             }else{
                 std::cout << "Non-PCM file detected\n";
                 good = false;
+                wav.close();
             }
         }else{
             std::cout << "Not valid WAV file\n";
             good = false;
+            wav.close();
         }
-        wav.close();
     }else{
         good = false;
         std::cout << "Could not open " << filename << '\n';

@@ -83,7 +83,6 @@ std::vector <int> wavReader::getSample(unsigned pos){
     for (int i = 0; i < numChannels; i++){
         int val = getBytes(wav,bitsPerSample/8);
         channels.push_back(val);
-        std::cout << "val: " << val << '\n';
     }
     return channels;
     
@@ -99,7 +98,7 @@ int main(int argc, char** argv){
             for (unsigned j = 0; j < rdr.subchunk2size; j++){
                 std::vector <int> channels = rdr.getSample(j);
                 for (size_t i = 0; i < channels.size(); i++){
-                    std::cout << channels[i] << '\n';
+                    std::cout << "Channel " << i << ": " << channels[i] << '\n';
                 }
             }
         }

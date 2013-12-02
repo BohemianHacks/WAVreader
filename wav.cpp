@@ -6,7 +6,7 @@
 #include <sstream>
 #include <vector>
 
-double normalize(val,max,min){
+double normalize(int val, int max, int min){
     return double(val-min)/double(max-min);
 }
 

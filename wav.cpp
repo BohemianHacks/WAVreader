@@ -110,12 +110,15 @@ int main(int argc, char** argv){
             double lastchange = 0;
             double period = 0;
             double lastperiod = 0;
+            std::vector <double> freqs;
             for(size_t i = 0; i < channels.size(); i++){
                 for (size_t j = 1; j < channels[i].size(); j++){
                     period = 1000.0*(double(j)/double(rdr.sampleRate));
                     change = channels[i][j]-channels[i][j-1];
                     if (int(change/(-1*change)) != int(lastchange/(-1*lastchange))){
-                        std::cout << "Change in direction detected " << 1000.0/(period-lastperiod) << '\n';
+                        if ((1000.0/(period-lastperiod)) != rdr.sampleRate){
+                            std::cout << "Change in direction detected " << 1000.0/(period-lastperiod) << '\n';
+                        }
                         lastperiod = period;
                     }
                     lastchange = change;

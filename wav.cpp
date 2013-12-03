@@ -105,10 +105,16 @@ int main(int argc, char** argv){
     }else{
         wavReader rdr(argv[1]);
         if (rdr.good){
-            std::vector <std::vector <int>> channels = rdr.getSamples(1000,2000);
+            std::vector <std::vector <int>> channels = rdr.getSamples(0,2000);
+            int change = 0;
+            int lastchange = 0;
             for(size_t i = 0; i < channels.size(); i++){
-                for (size_t j = 0; j < channels[i].size(); j++){
-                    std::cout << "Time: " << 1000.0*double(j)/double(rdr.sampleRate) << '\n';
+                for (size_t j = 1; j < channels[i].size(); j++){
+                    change = channels[i][j]-channels[i][j-1]
+                    if ((change/(-1*change)) != (lastchange/(-1*lastchange))){
+                        std::cout << "Change in direction detected\n";
+                    }
+                    lastchange = change;
                 }
             }
         }

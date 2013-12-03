@@ -117,7 +117,7 @@ int main(int argc, char** argv){
                     change = channels[i][j]-channels[i][j-1];
                     if (int(change/(-1*change)) != int(lastchange/(-1*lastchange))){
                         if (int(1000.0/(period-lastperiod)) != rdr.sampleRate){
-                            //std::cout << "Change in direction detected " << 1000.0/(period-lastperiod) << '\n';
+                            std::cout << "Change in direction detected " << 1000.0/(period-lastperiod) << '\n';
                             std::cout << rdr.sampleRate << '\n';
                         }
                         lastperiod = period;

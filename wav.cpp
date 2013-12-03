@@ -114,7 +114,7 @@ int main(int argc, char** argv){
                 for (size_t j = 1; j < channels[i].size(); j++){
                     period = 1000.0*(double(j)/double(rdr.sampleRate));
                     change = channels[i][j]-channels[i][j-1];
-                    if ((change/(-1*change)) != (lastchange/(-1*lastchange))){
+                    if (int(change/(-1*change)) != int(lastchange/(-1*lastchange))){
                         std::cout << "Change in direction detected " << 1000/(period-lastperiod) << '\n';
                         lastperiod = period;
                     }

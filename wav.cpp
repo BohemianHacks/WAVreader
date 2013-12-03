@@ -110,7 +110,7 @@ int main(int argc, char** argv){
             int lastchange = 0;
             for(size_t i = 0; i < channels.size(); i++){
                 for (size_t j = 1; j < channels[i].size(); j++){
-                    change = channels[i][j]-channels[i][j-1]
+                    change = channels[i][j]-channels[i][j-1];
                     if ((change/(-1*change)) != (lastchange/(-1*lastchange))){
                         std::cout << "Change in direction detected\n";
                     }

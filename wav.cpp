@@ -108,7 +108,7 @@ int main(int argc, char** argv){
             std::vector <std::vector <int>> channels = rdr.getSamples(0,1000);
             for(size_t i = 0; i < channels.size(); i++){
                 for (size_t j = 0; j < channels[i].size(); j++){
-                    std::cout << "Time: " << i/rdr.sampleRate << '\n';
+                    std::cout << "Time: " << double(i)/double(rdr.sampleRate) << '\n';
                 }
             }
         }

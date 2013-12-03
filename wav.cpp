@@ -108,11 +108,15 @@ int main(int argc, char** argv){
             std::vector <std::vector <int>> channels = rdr.getSamples(0,2000);
             double change = 0;
             double lastchange = 0;
+            double period = 0;
+            double lastperiod = 0;
             for(size_t i = 0; i < channels.size(); i++){
                 for (size_t j = 1; j < channels[i].size(); j++){
+                    period = 1000.0*(double(j)/double(rdr.sampleRate));
                     change = channels[i][j]-channels[i][j-1];
                     if ((change/(-1*change)) != (lastchange/(-1*lastchange))){
-                        std::cout << "Change in direction detected\n";
+                        std::cout << "Change in direction detected " << period-lastperiod;
+                        lastperiod = period;
                     }
                     lastchange = change;
                 }

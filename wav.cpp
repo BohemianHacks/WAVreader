@@ -104,7 +104,11 @@ int main(int argc, char** argv){
         wavReader rdr(argv[1]);
         if (rdr.good){
             std::vector <int> channels = rdr.getSamples(0,1000);
-            for(unsigned i = 0; i < channels.size)
+            for(size_t i = 0; i < channels.size; i++){
+                for (size_t j = 0; j < channels[i].size; j++){
+                    std::cout << "Channel " << i << ": " << channels[i][j] << '\n'
+                }
+            }
         }
     }
 }

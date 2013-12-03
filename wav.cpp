@@ -105,7 +105,7 @@ int main(int argc, char** argv){
     }else{
         wavReader rdr(argv[1]);
         if (rdr.good){
-            std::vector <std::vector <int>> channels = rdr.getSamples(0,1000);
+            std::vector <std::vector <int>> channels = rdr.getSamples(1000,2000);
             for(size_t i = 0; i < channels.size(); i++){
                 for (size_t j = 0; j < channels[i].size(); j++){
                     std::cout << "Time: " << 1000.0*double(j)/double(rdr.sampleRate) << '\n';

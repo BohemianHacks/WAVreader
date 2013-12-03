@@ -88,10 +88,12 @@ std::vector <std::vector <int>> wavReader::getSamples(unsigned startTime, unsign
     unsigned pos = sampleRate*(double(startTime)/1000.0);
     wav.seekg(pos+dataStart, wav.beg);
     for (unsigned i = 0; i < numChannels; i++){
+        std::vector <int> chan;
         for (int j = 0; j < frames; j++){
             int val = (int16_t)getBytes(wav,bitsPerSample/8);
-            channels[i].push_back(val);
+            chan.push_back(val);
         }
+        channels.push_back(chan);
     }
     return channels;
 }

@@ -87,8 +87,8 @@ std::vector <std::vector <int>> wavReader::getSamples(unsigned startTime, unsign
     unsigned frames = sampleRate*(double(endTime - startTime)/1000.0);
     unsigned pos = sampleRate*(double(startTime)/1000.0);
     wav.seekg(pos+dataStart, wav.beg);
-    for (unsigned i = 0; i < numChannels; j++){
-        for (int j = 0; j < frames; i++){
+    for (unsigned i = 0; i < numChannels; i++){
+        for (int j = 0; j < frames; j++){
             int val = (int16_t)getBytes(wav,bitsPerSample/8);
             channels[i].push_back(val);
         }

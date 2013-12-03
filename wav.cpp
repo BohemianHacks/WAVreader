@@ -105,7 +105,7 @@ int main(int argc, char** argv){
     }else{
         wavReader rdr(argv[1]);
         if (rdr.good){
-            std::vector <std::vector <int>> channels = rdr.getSamples(0,20000);
+            std::vector <std::vector <int>> channels = rdr.getSamples(0,200000);
             double change = 0;
             double lastchange = 0;
             double period = 0;

@@ -119,8 +119,8 @@ int main(int argc, char** argv){
                         if (int(1000.0/(period-lastperiod)) != int(rdr.sampleRate)){
                             std::cout << "Change in direction detected " << 1000.0/(period-lastperiod) << '\n';
                             std::cout << rdr.sampleRate << '\n';
+                            lastperiod = period;
                         }
-                        lastperiod = period;
                     }
                     lastchange = change;
                 }

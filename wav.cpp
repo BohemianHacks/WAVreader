@@ -106,8 +106,8 @@ int main(int argc, char** argv){
         wavReader rdr(argv[1]);
         if (rdr.good){
             std::vector <std::vector <int>> channels = rdr.getSamples(0,2000);
-            int change = 0;
-            int lastchange = 0;
+            double change = 0;
+            double lastchange = 0;
             for(size_t i = 0; i < channels.size(); i++){
                 for (size_t j = 1; j < channels[i].size(); j++){
                     change = channels[i][j]-channels[i][j-1];
